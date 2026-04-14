@@ -9,7 +9,7 @@ import { statusCommand } from "./commands/status.js";
 const program = new Command();
 
 program
-  .name("deptrace")
+  .name("depcrumbs")
   .description(
     "Dependency tracking and audit trail for every package installation",
   )
@@ -20,14 +20,14 @@ program.option("--hook", "Run the PostToolUse hook handler (reads JSON from stdi
 
 program
   .command("init")
-  .description("Create a .deptrace.config.json in the current directory")
+  .description("Create a .depcrumbs.config.json in the current directory")
   .action(() => {
     initCommand();
   });
 
 program
   .command("setup")
-  .description("Add DepTrace hook to ~/.claude/settings.json")
+  .description("Add DepCrumbs hook to ~/.claude/settings.json")
   .action(() => {
     setupHooksCommand();
   });
@@ -59,7 +59,7 @@ program
 
 program
   .command("status")
-  .description("Check if DepTrace hooks are configured")
+  .description("Check if DepCrumbs hooks are configured")
   .action(() => {
     statusCommand();
   });

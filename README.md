@@ -1,35 +1,35 @@
 <div align="center">
 
-<img src="docs/logo.svg" alt="DepTrace" width="140">
+<img src="docs/logo.svg" alt="DepCrumbs" width="140">
 
-# DepTrace
+# DepCrumbs
 
 **Every install leaves a trail.**
 
 Full audit trail for every package your AI assistant installs — automatically.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![npm version](https://img.shields.io/npm/v/deptrace.svg)](https://www.npmjs.com/package/deptrace)
+[![npm version](https://img.shields.io/npm/v/depcrumbs.svg)](https://www.npmjs.com/package/depcrumbs)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org)
 
-[Website](https://frederikbruun.github.io/DepTrace) · [Getting Started](#getting-started) · [How It Works](#how-it-works) · [Roadmap](#roadmap)
+[Website](https://frederikbruun.github.io/DepCrumbs) · [Getting Started](#getting-started) · [How It Works](#how-it-works) · [Roadmap](#roadmap)
 
 </div>
 
 ---
 
-DepTrace hooks into Claude Code and records every dependency installation with rich metadata — version, license, registry source, integrity hash, and dependency tree. Across **10 package managers**. With **zero configuration**.
+DepCrumbs hooks into Claude Code and records every dependency installation with rich metadata — version, license, registry source, integrity hash, and dependency tree. Across **10 package managers**. With **zero configuration**.
 
 ```
 $ npm install express lodash
-[DepTrace] express@4.21.0 — MIT — sha512-abc...
-[DepTrace] lodash@4.17.21 — MIT — sha512-def...
-Saved to .deptrace.json
+[DepCrumbs] express@4.21.0 — MIT — sha512-abc...
+[DepCrumbs] lodash@4.17.21 — MIT — sha512-def...
+Saved to .depcrumbs.json
 ```
 
 ## Why?
 
-When AI assistants install packages on your behalf, you lose visibility. DepTrace gives it back:
+When AI assistants install packages on your behalf, you lose visibility. DepCrumbs gives it back:
 
 - **What** was installed — exact package, exact version
 - **Where** it came from — registry URL and integrity hash
@@ -42,7 +42,7 @@ When AI assistants install packages on your behalf, you lose visibility. DepTrac
 ### Claude Code Plugin
 
 ```bash
-claude plugin add deptrace
+claude plugin add depcrumbs
 ```
 
 That's it. Hook is configured automatically.
@@ -50,8 +50,8 @@ That's it. Hook is configured automatically.
 ### Standalone CLI
 
 ```bash
-npm install -g deptrace
-deptrace setup
+npm install -g depcrumbs
+depcrumbs setup
 ```
 
 `setup` adds a PostToolUse hook to `~/.claude/settings.json`. Tracking begins immediately.
@@ -86,22 +86,22 @@ Claude Code runs "npm install express"
    Enricher fetches metadata from registry
          │
          ▼
-   Storage writes to .deptrace.json + ~/.deptrace/
+   Storage writes to .depcrumbs.json + ~/.depcrumbs/
 ```
 
 1. **Hook** — A PostToolUse hook on Bash fires after every command
 2. **Parse** — Detects install commands across all 10 managers
 3. **Enrich** — Fetches license, version, hash, and deps from the registry
-4. **Store** — Writes per-project `.deptrace.json` and global `~/.deptrace/global.json`
+4. **Store** — Writes per-project `.depcrumbs.json` and global `~/.depcrumbs/global.json`
 
 ## CLI
 
 ```bash
-deptrace init          # Create .deptrace.config.json
-deptrace setup         # Configure Claude Code hooks
-deptrace log           # View audit trail (--since, --package, --manager filters)
-deptrace export        # Export as JSON or CSV (--csv)
-deptrace status        # Health check — is the hook installed?
+depcrumbs init          # Create .depcrumbs.config.json
+depcrumbs setup         # Configure Claude Code hooks
+depcrumbs log           # View audit trail (--since, --package, --manager filters)
+depcrumbs export        # Export as JSON or CSV (--csv)
+depcrumbs status        # Health check — is the hook installed?
 ```
 
 ## Output
@@ -141,10 +141,10 @@ deptrace status        # Health check — is the hook installed?
 ## Configuration
 
 ```bash
-deptrace init
+depcrumbs init
 ```
 
-Creates `.deptrace.config.json`:
+Creates `.depcrumbs.config.json`:
 
 ```json
 {

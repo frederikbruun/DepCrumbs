@@ -1,4 +1,4 @@
-export interface DepTraceConfig {
+export interface DepCrumbsConfig {
   format: "json" | "markdown";
   enrichment: {
     license: boolean;
@@ -8,7 +8,7 @@ export interface DepTraceConfig {
   ignore: string[];
 }
 
-export const DEFAULT_CONFIG: DepTraceConfig = {
+export const DEFAULT_CONFIG: DepCrumbsConfig = {
   format: "json",
   enrichment: { license: true, integrity: true, dependencyTree: true },
   ignore: [],

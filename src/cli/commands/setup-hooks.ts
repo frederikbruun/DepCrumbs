@@ -39,7 +39,7 @@ export function setupHooksCommand(): void {
     settings.hooks.PostToolUse = [];
   }
 
-  const hookCommand = "deptrace --hook";
+  const hookCommand = "depcrumbs --hook";
 
   // Check if hook is already configured
   const existing = settings.hooks.PostToolUse.find((entry) =>
@@ -47,7 +47,7 @@ export function setupHooksCommand(): void {
   );
 
   if (existing) {
-    console.log("DepTrace hook is already configured in ~/.claude/settings.json");
+    console.log("DepCrumbs hook is already configured in ~/.claude/settings.json");
     return;
   }
 
@@ -63,5 +63,5 @@ export function setupHooksCommand(): void {
   });
 
   writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + "\n", "utf-8");
-  console.log("Added DepTrace PostToolUse hook to ~/.claude/settings.json");
+  console.log("Added DepCrumbs PostToolUse hook to ~/.claude/settings.json");
 }

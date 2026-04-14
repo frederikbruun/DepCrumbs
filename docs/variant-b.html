@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DepTrace -- Know Exactly What Gets Installed</title>
+  <title>DepCrumbs -- Know Exactly What Gets Installed</title>
   <meta name="description" content="A dependency audit trail tool for Claude Code. Automatically tracks every package installation across 10 package managers with full metadata.">
   <link rel="stylesheet" href="variant-b.css">
 </head>
@@ -12,12 +12,12 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1 class="hero-title">DepTrace</h1>
+      <h1 class="hero-title">DepCrumbs</h1>
       <p class="hero-tagline">Know exactly what gets installed. Every package. Every time.</p>
       <p class="hero-desc">Automatic dependency auditing for Claude Code. Track every package across 10 managers with full metadata, license info, and integrity hashes.</p>
       <div class="hero-buttons">
         <a href="#installation" class="btn btn-gradient">Quick Start</a>
-        <a href="https://github.com/frederikbruun/DepTrace" class="btn btn-outline">GitHub</a>
+        <a href="https://github.com/frederikbruun/DepCrumbs" class="btn btn-outline">GitHub</a>
       </div>
 
       <!-- Terminal mockup -->
@@ -28,13 +28,13 @@
           <span class="terminal-dot dot-green"></span>
         </div>
         <div class="terminal-body">
-          <pre><code><span class="t-prompt">~ $</span> <span class="t-cmd">deptrace setup</span>
+          <pre><code><span class="t-prompt">~ $</span> <span class="t-cmd">depcrumbs setup</span>
 <span class="t-output">Hook installed successfully.</span>
 
 <span class="t-prompt">~ $</span> <span class="t-cmd">npm install express lodash</span>
-<span class="t-tag">[DepTrace]</span> express@4.21.0 &#8212; MIT &#8212; sha512-abc...
-<span class="t-tag">[DepTrace]</span> lodash@4.17.21 &#8212; MIT &#8212; sha512-def...
-<span class="t-output">Saved to .deptrace.json</span></code></pre>
+<span class="t-tag">[DepCrumbs]</span> express@4.21.0 &#8212; MIT &#8212; sha512-abc...
+<span class="t-tag">[DepCrumbs]</span> lodash@4.17.21 &#8212; MIT &#8212; sha512-def...
+<span class="t-output">Saved to .depcrumbs.json</span></code></pre>
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@
         <div class="feature-card">
           <div class="feature-icon icon-storage">&#9744;</div>
           <h3>Dual Storage</h3>
-          <p>Per-project .deptrace files + global ~/.deptrace/ history</p>
+          <p>Per-project .depcrumbs files + global ~/.depcrumbs/ history</p>
           <div class="badge-row">
             <span class="badge badge-blue">local</span>
             <span class="badge badge-green">global</span>
@@ -181,8 +181,8 @@
         <div class="install-card">
           <div class="install-header install-header-plugin">Plugin</div>
           <div class="install-body">
-            <p>Add DepTrace as a Claude Code plugin for automatic tracking.</p>
-            <pre class="install-code"><code>claude plugin add deptrace</code></pre>
+            <p>Add DepCrumbs as a Claude Code plugin for automatic tracking.</p>
+            <pre class="install-code"><code>claude plugin add depcrumbs</code></pre>
             <p class="install-note">Installs hooks automatically. No further setup needed.</p>
           </div>
         </div>
@@ -190,10 +190,10 @@
           <div class="install-header install-header-cli">CLI</div>
           <div class="install-body">
             <p>Install the CLI for manual control and scripting.</p>
-            <pre class="install-code"><code>npm install -g deptrace
-deptrace init
-deptrace setup</code></pre>
-            <p class="install-note">Run <code>deptrace status</code> to verify installation.</p>
+            <pre class="install-code"><code>npm install -g depcrumbs
+depcrumbs init
+depcrumbs setup</code></pre>
+            <p class="install-note">Run <code>depcrumbs status</code> to verify installation.</p>
           </div>
         </div>
       </div>
@@ -255,7 +255,7 @@ deptrace setup</code></pre>
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-brand">DepTrace</p>
+      <p class="footer-brand">DepCrumbs</p>
       <p class="footer-license">MIT License</p>
     </div>
   </footer>

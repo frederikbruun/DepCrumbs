@@ -20,14 +20,14 @@ interface ClaudeSettings {
 export function statusCommand(): void {
   const settingsPath = resolve(homedir(), ".claude", "settings.json");
 
-  console.log("DepTrace Status");
+  console.log("DepCrumbs Status");
   console.log("===============\n");
 
   // Check settings file
   if (!existsSync(settingsPath)) {
     console.log("Claude settings: NOT FOUND");
     console.log(`  Expected at: ${settingsPath}`);
-    console.log('  Run "deptrace setup" to configure.\n');
+    console.log('  Run "depcrumbs setup" to configure.\n');
     return;
   }
 
@@ -44,19 +44,19 @@ export function statusCommand(): void {
   const postToolUse = settings.hooks?.PostToolUse;
   if (!postToolUse || postToolUse.length === 0) {
     console.log("Hook status: NOT CONFIGURED");
-    console.log('  Run "deptrace setup" to add the PostToolUse hook.\n');
+    console.log('  Run "depcrumbs setup" to add the PostToolUse hook.\n');
     return;
   }
 
-  const deptraceHook = postToolUse.find((entry) =>
-    entry.hooks?.some((h) => h.command.includes("deptrace")),
+  const depcrumbsHook = postToolUse.find((entry) =>
+    entry.hooks?.some((h) => h.command.includes("depcrumbs")),
   );
 
-  if (deptraceHook) {
+  if (depcrumbsHook) {
     console.log("Hook status: CONFIGURED");
-    console.log(`  Matcher: ${deptraceHook.matcher}`);
-    const hookEntry = deptraceHook.hooks.find((h) =>
-      h.command.includes("deptrace"),
+    console.log(`  Matcher: ${depcrumbsHook.matcher}`);
+    const hookEntry = depcrumbsHook.hooks.find((h) =>
+      h.command.includes("depcrumbs"),
     );
     if (hookEntry) {
       console.log(`  Command: ${hookEntry.command}`);
@@ -64,12 +64,12 @@ export function statusCommand(): void {
     }
   } else {
     console.log("Hook status: NOT CONFIGURED");
-    console.log('  Run "deptrace setup" to add the PostToolUse hook.');
+    console.log('  Run "depcrumbs setup" to add the PostToolUse hook.');
   }
 
   // Check local config
   const cwd = process.cwd();
-  const localConfig = resolve(cwd, ".deptrace.config.json");
+  const localConfig = resolve(cwd, ".depcrumbs.config.json");
   if (existsSync(localConfig)) {
     console.log(`\nLocal config: ${localConfig}`);
   } else {
@@ -77,7 +77,7 @@ export function statusCommand(): void {
   }
 
   // Check global storage
-  const globalStorage = resolve(homedir(), ".deptrace");
+  const globalStorage = resolve(homedir(), ".depcrumbs");
   if (existsSync(globalStorage)) {
     console.log(`Global storage: ${globalStorage}`);
   } else {

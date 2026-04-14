@@ -1,4 +1,4 @@
-# DepTrace
+# DepCrumbs
 
 Dependency audit trail for Claude Code.
 
@@ -15,7 +15,7 @@ npm test
 - `src/parsers/` — one parser per package manager, detects install commands
 - `src/enrichers/` — fetches metadata from registries (license, hash, deps)
 - `src/storage/` — JSON and Markdown storage backends
-- `src/cli/` — standalone CLI (deptrace init/setup/log/export/status)
+- `src/cli/` — standalone CLI (depcrumbs init/setup/log/export/status)
 - `hooks/` — Claude Code PostToolUse hook on Bash
 
 ## Key Patterns

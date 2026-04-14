@@ -4,7 +4,7 @@ import { DEFAULT_CONFIG } from "../../config/index.js";
 
 export function initCommand(): void {
   const cwd = process.cwd();
-  const configPath = resolve(cwd, ".deptrace.config.json");
+  const configPath = resolve(cwd, ".depcrumbs.config.json");
 
   if (existsSync(configPath)) {
     console.log(`Config already exists at ${configPath}`);

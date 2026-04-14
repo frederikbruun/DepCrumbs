@@ -20,7 +20,7 @@ export function getProjectStoragePath(
   cwd: string,
   format: "json" | "markdown",
 ): string {
-  const ext = format === "json" ? ".deptrace.json" : ".deptrace.md";
+  const ext = format === "json" ? ".depcrumbs.json" : ".depcrumbs.md";
   const gitRoot = findGitRoot(cwd);
   const base = gitRoot ?? cwd;
   return resolve(base, ext);
@@ -28,7 +28,7 @@ export function getProjectStoragePath(
 
 export function getGlobalStoragePath(format: "json" | "markdown"): string {
   const filename = format === "json" ? "global.json" : "global.md";
-  return resolve(homedir(), ".deptrace", filename);
+  return resolve(homedir(), ".depcrumbs", filename);
 }
 
 export function ensureDir(dirPath: string): void {

@@ -12,7 +12,7 @@ export class MarkdownStorage implements StorageBackend {
     ensureDir(dirname(this.filePath));
 
     if (!existsSync(this.filePath)) {
-      await writeFile(this.filePath, "# DepTrace Audit Log\n\n", "utf-8");
+      await writeFile(this.filePath, "# DepCrumbs Audit Log\n\n", "utf-8");
     }
 
     const section = this.formatEntry(entry);

@@ -1,6 +1,6 @@
 {
-  "name": "deptrace",
-  "displayName": "DepTrace",
+  "name": "depcrumbs",
+  "displayName": "DepCrumbs",
   "description": "Dependency tracking and audit trail for every package installation",
   "version": "1.0.0",
   "author": { "name": "Frederik Bruun" },

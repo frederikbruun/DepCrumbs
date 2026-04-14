@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DepTrace — Full Audit Trail for AI-Installed Packages</title>
-  <meta name="description" content="DepTrace tracks every package your AI coding assistant installs. Full audit trail with license, version, and integrity data across 10 package managers.">
+  <title>DepCrumbs — Full Audit Trail for AI-Installed Packages</title>
+  <meta name="description" content="DepCrumbs tracks every package your AI coding assistant installs. Full audit trail with license, version, and integrity data across 10 package managers.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="variant-a.css">
 </head>
@@ -13,12 +13,12 @@
   <!-- Nav -->
   <nav class="navbar">
     <div class="navbar-inner">
-      <a href="#" class="navbar-logo">Dep<span>Trace</span></a>
+      <a href="#" class="navbar-logo">Dep<span>Crumbs</span></a>
       <ul class="navbar-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#install">Install</a></li>
-        <li><a href="https://github.com/frederikbruun/deptrace" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://github.com/frederikbruun/depcrumbs" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
       <button class="navbar-hamburger" aria-label="Menu">&#9776;</button>
     </div>
@@ -27,16 +27,16 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-inner">
-      <h1 class="hero-title">DepTrace</h1>
+      <h1 class="hero-title">DepCrumbs</h1>
       <p class="hero-slogan">Every install leaves a trail</p>
       <p class="tagline">Full audit trail for every package your AI assistant installs</p>
       <p class="subtitle">
-        DepTrace hooks into Claude Code and logs every dependency installation with version,
+        DepCrumbs hooks into Claude Code and logs every dependency installation with version,
         license, integrity hash, and full dependency tree — automatically.
       </p>
       <div class="btn-row">
         <a href="#install" class="btn btn-primary">Get Started</a>
-        <a href="https://github.com/frederikbruun/deptrace" class="btn btn-outline" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://github.com/frederikbruun/depcrumbs" class="btn btn-outline" target="_blank" rel="noopener">View on GitHub</a>
       </div>
       <div class="terminal">
         <div class="terminal-bar">
@@ -45,14 +45,14 @@
           <span class="terminal-dot dot-green"></span>
         </div>
         <div class="terminal-body">
-<pre><span class="prompt">~ $</span> <span class="cmd">deptrace setup</span>
+<pre><span class="prompt">~ $</span> <span class="cmd">depcrumbs setup</span>
 <span class="success">&#10003; Hook configured in ~/.claude/settings.json</span>
 <span class="success">&#10003; Ready to track installations</span>
 
 <span class="prompt">~ $</span> <span class="cmd">npm install express lodash</span>
-<span class="info">[DepTrace]</span> express@4.21.0 — MIT — sha512-abc...
-<span class="info">[DepTrace]</span> lodash@4.17.21 — MIT — sha512-def...
-<span class="output">Saved to .deptrace.json</span></pre>
+<span class="info">[DepCrumbs]</span> express@4.21.0 — MIT — sha512-abc...
+<span class="info">[DepCrumbs]</span> lodash@4.17.21 — MIT — sha512-def...
+<span class="output">Saved to .depcrumbs.json</span></pre>
         </div>
       </div>
     </div>
@@ -84,12 +84,12 @@
     <div class="section-inner">
       <p class="section-label">How It Works</p>
       <h2 class="section-heading">Four steps, fully automatic</h2>
-      <p class="section-sub">Once set up, DepTrace runs silently in the background every time Claude Code installs a package.</p>
+      <p class="section-sub">Once set up, DepCrumbs runs silently in the background every time Claude Code installs a package.</p>
       <div class="steps-grid">
         <div class="step">
           <div class="step-number">01</div>
           <h3>Install Hook</h3>
-          <p>One command to set up. DepTrace adds a PostToolUse hook to Claude Code that fires after every tool invocation.</p>
+          <p>One command to set up. DepCrumbs adds a PostToolUse hook to Claude Code that fires after every tool invocation.</p>
         </div>
         <div class="step">
           <div class="step-number">02</div>
@@ -115,7 +115,7 @@
     <div class="section-inner">
       <p class="section-label">What Gets Tracked</p>
       <h2 class="section-heading">Structured data for every install</h2>
-      <p class="section-sub">Each entry in .deptrace.json captures the full context of what was installed and why.</p>
+      <p class="section-sub">Each entry in .depcrumbs.json captures the full context of what was installed and why.</p>
       <div class="code-block">
 <pre>{
   <span class="key">"timestamp"</span>: <span class="string">"2026-04-14T20:15:00.000Z"</span>,
@@ -144,12 +144,12 @@
         <div class="install-card">
           <h3>Claude Code Plugin</h3>
           <p>Install directly from the Claude Code marketplace for automatic hook setup and updates.</p>
-          <code>claude plugin install deptrace</code>
+          <code>claude plugin install depcrumbs</code>
         </div>
         <div class="install-card">
           <h3>Standalone CLI</h3>
           <p>Install globally via npm, then run setup to configure the hook manually.</p>
-          <code>npm install -g deptrace &amp;&amp; deptrace setup</code>
+          <code>npm install -g depcrumbs &amp;&amp; depcrumbs setup</code>
         </div>
       </div>
     </div>
@@ -210,7 +210,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    DepTrace &mdash; MIT License
+    DepCrumbs &mdash; MIT License
   </footer>
 
 </body>

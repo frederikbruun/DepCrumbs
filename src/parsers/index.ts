@@ -85,6 +85,13 @@ function splitCommands(input: string): string[] {
 }
 
 /**
+ * Strip shell redirects (2>&1, >/dev/null, 2>/dev/null, etc.) from a command.
+ */
+function stripRedirects(command: string): string {
+  return command.replace(/\s+\d*>&\d+/g, "").replace(/\s+\d*>+\s*\/\S+/g, "").trim();
+}
+
+/**
  * Detect install commands in a (possibly compound) shell command string.
  * Returns all matches from all registered parsers.
  */
@@ -93,7 +100,7 @@ export function detect(command: string): ParsedInstall[] {
   const results: ParsedInstall[] = [];
 
   for (const sub of subCommands) {
-    const trimmed = sub.trim();
+    const trimmed = stripRedirects(sub.trim());
     if (trimmed.length === 0) continue;
 
     for (const p of parsers) {

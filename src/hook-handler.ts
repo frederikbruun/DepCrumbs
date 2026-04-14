@@ -56,7 +56,7 @@ async function main(): Promise<void> {
   if (logged.length > 0) {
     console.log(
       JSON.stringify({
-        additionalContext: `[DepTrace] Logged: ${logged.join(", ")}`,
+        additionalContext: `[DepCrumbs] Logged: ${logged.join(", ")}`,
       }),
     );
   }

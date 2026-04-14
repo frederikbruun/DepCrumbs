@@ -1,6 +1,6 @@
 node_modules/
 dist/
 *.tsbuildinfo
-.deptrace.json
-.deptrace.md
-.deptrace.config.json
+.depcrumbs.json
+.depcrumbs.md
+.depcrumbs.config.json
