@@ -1,59 +1,150 @@
+<div align="center">
+
+<img src="docs/logo.svg" alt="DepTrace" width="140">
+
 # DepTrace
 
-Full audit trail for every package your AI assistant installs.
+**Every install leaves a trail.**
 
-DepTrace hooks into Claude Code and automatically records every dependency installation with rich metadata -- version, license, registry source, integrity hash, and dependency tree. Never lose track of what got installed, when, or why.
+Full audit trail for every package your AI assistant installs — automatically.
 
-## Features
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/deptrace.svg)](https://www.npmjs.com/package/deptrace)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org)
 
-- **Automatic tracking** via Claude Code PostToolUse hooks -- zero manual effort
-- **10 package managers**: npm, yarn, pnpm, pip, uv, cargo, go, gem, composer, brew
-- **Full metadata**: version, license, registry URL, integrity hash, dependency tree
-- **JSON and Markdown** output formats
-- **Per-project and global** tracking
-- **Standalone CLI** for viewing, exporting, and managing audit trails
+[Website](https://frederikbruun.github.io/DepTrace) · [Getting Started](#getting-started) · [How It Works](#how-it-works) · [Roadmap](#roadmap)
 
-## Quick Start
+</div>
 
-### Option 1: Claude Code Plugin
+---
 
-Install DepTrace as a Claude Code plugin for automatic tracking:
+DepTrace hooks into Claude Code and records every dependency installation with rich metadata — version, license, registry source, integrity hash, and dependency tree. Across **10 package managers**. With **zero configuration**.
+
+```
+$ npm install express lodash
+[DepTrace] express@4.21.0 — MIT — sha512-abc...
+[DepTrace] lodash@4.17.21 — MIT — sha512-def...
+Saved to .deptrace.json
+```
+
+## Why?
+
+When AI assistants install packages on your behalf, you lose visibility. DepTrace gives it back:
+
+- **What** was installed — exact package, exact version
+- **Where** it came from — registry URL and integrity hash
+- **What license** it uses — MIT? GPL? Unknown?
+- **What it depends on** — full dependency tree
+- **When and how** — timestamp, command, working directory
+
+## Getting Started
+
+### Claude Code Plugin
 
 ```bash
 claude plugin add deptrace
 ```
 
-The plugin registers a PostToolUse hook on Bash that detects install commands automatically.
+That's it. Hook is configured automatically.
 
-### Option 2: Standalone CLI
+### Standalone CLI
 
 ```bash
 npm install -g deptrace
 deptrace setup
 ```
 
-`deptrace setup` configures the Claude Code hooks in your environment so tracking begins immediately.
+`setup` adds a PostToolUse hook to `~/.claude/settings.json`. Tracking begins immediately.
+
+## Supported Package Managers
+
+| Manager | Install Commands | Registry |
+|---------|-----------------|----------|
+| **npm** | `npm install`, `npm i`, `npm add`, `npm ci` | npmjs.org |
+| **yarn** | `yarn add`, `yarn install` | npmjs.org |
+| **pnpm** | `pnpm add`, `pnpm install` | npmjs.org |
+| **pip** | `pip install`, `pip3 install`, `python -m pip install` | PyPI |
+| **uv** | `uv add`, `uv pip install` | PyPI |
+| **cargo** | `cargo add`, `cargo install` | crates.io |
+| **go** | `go get`, `go install` | proxy.golang.org |
+| **gem** | `gem install` | rubygems.org |
+| **composer** | `composer require` | packagist.org |
+| **brew** | `brew install`, `brew reinstall` | formulae.brew.sh |
 
 ## How It Works
 
-1. A **PostToolUse hook** fires after every Bash tool invocation in Claude Code
-2. The hook **parses the command** to detect package install operations (e.g., `npm install`, `pip install`, `cargo add`)
-3. Detected packages are **enriched** with metadata from their respective registries (npm registry, PyPI, crates.io, etc.)
-4. The complete audit record is **stored** as a JSON or Markdown file in your project's `.deptrace/` directory
+```
+Claude Code runs "npm install express"
+         │
+         ▼
+   PostToolUse hook fires
+         │
+         ▼
+   Parser detects install command
+         │
+         ▼
+   Enricher fetches metadata from registry
+         │
+         ▼
+   Storage writes to .deptrace.json + ~/.deptrace/
+```
 
-## CLI Commands
+1. **Hook** — A PostToolUse hook on Bash fires after every command
+2. **Parse** — Detects install commands across all 10 managers
+3. **Enrich** — Fetches license, version, hash, and deps from the registry
+4. **Store** — Writes per-project `.deptrace.json` and global `~/.deptrace/global.json`
 
-| Command            | Description                              |
-| ------------------ | ---------------------------------------- |
-| `deptrace init`    | Create a `.deptrace.config.json` in the current project |
-| `deptrace setup`   | Configure Claude Code hooks for automatic tracking |
-| `deptrace log`     | View the audit trail for the current project |
-| `deptrace export`  | Export audit data as JSON or CSV         |
-| `deptrace status`  | Check hook health and configuration      |
+## CLI
+
+```bash
+deptrace init          # Create .deptrace.config.json
+deptrace setup         # Configure Claude Code hooks
+deptrace log           # View audit trail (--since, --package, --manager filters)
+deptrace export        # Export as JSON or CSV (--csv)
+deptrace status        # Health check — is the hook installed?
+```
+
+## Output
+
+### JSON (default)
+
+```json
+{
+  "timestamp": "2026-04-14T20:15:00.000Z",
+  "packageManager": "npm",
+  "command": "npm install express",
+  "packages": [{
+    "name": "express",
+    "resolvedVersion": "4.21.0",
+    "license": "MIT",
+    "registryUrl": "https://registry.npmjs.org/express",
+    "integrityHash": "sha512-...",
+    "isDirect": true,
+    "directDependencies": ["accepts", "body-parser", "..."]
+  }]
+}
+```
+
+### Markdown
+
+```markdown
+## 2026-04-14T20:15:00.000Z
+
+- **Package Manager:** npm
+- **Command:** `npm install express`
+
+| Package | Version | License | Registry | Hash |
+|---------|---------|---------|----------|------|
+| express | 4.21.0  | MIT     | npmjs    | sha512-... |
+```
 
 ## Configuration
 
-Create a `.deptrace.config.json` in your project root (or run `deptrace init`):
+```bash
+deptrace init
+```
+
+Creates `.deptrace.config.json`:
 
 ```json
 {
@@ -67,59 +158,21 @@ Create a `.deptrace.config.json` in your project root (or run `deptrace init`):
 }
 ```
 
-| Option                      | Default  | Description                                    |
-| --------------------------- | -------- | ---------------------------------------------- |
-| `format`                    | `"json"` | Output format: `"json"` or `"markdown"`        |
-| `enrichment.license`        | `true`   | Fetch license info from registry               |
-| `enrichment.integrity`      | `true`   | Fetch integrity/checksum hash                  |
-| `enrichment.dependencyTree` | `true`   | Resolve transitive dependencies                |
-| `ignore`                    | `[]`     | Package name patterns to skip                  |
-
-## Output Formats
-
-### JSON
-
-```json
-{
-  "timestamp": "2025-01-15T10:32:00Z",
-  "command": "npm install express",
-  "packages": [
-    {
-      "name": "express",
-      "version": "4.21.2",
-      "manager": "npm",
-      "license": "MIT",
-      "registry": "https://registry.npmjs.org/express",
-      "integrity": "sha512-...",
-      "dependencies": ["accepts", "body-parser", "..."]
-    }
-  ]
-}
-```
-
-### Markdown
-
-```markdown
-## 2025-01-15 10:32 — npm install express
-
-| Field      | Value                                    |
-| ---------- | ---------------------------------------- |
-| Package    | express                                  |
-| Version    | 4.21.2                                   |
-| Manager    | npm                                      |
-| License    | MIT                                      |
-| Integrity  | sha512-...                               |
-```
+Set `"format": "markdown"` for human-readable output.
 
 ## Roadmap
 
-- SBOM export (CycloneDX / SPDX)
-- Vulnerability scanning integration (OSV, Snyk)
-- Dashboard UI for browsing audit history
-- Team-shared audit trails via remote storage
-- Policy enforcement (block unlicensed or GPL packages)
-- Support for additional package managers (apt, dnf, nix)
+- **Multi-tool support** — Codex CLI, Warp, terminal integrations
+- **SBOM export** — CycloneDX and SPDX formats
+- **Vulnerability scanning** — Cross-reference against CVE databases
+- **Dashboard UI** — Browse dependency history in a web interface
+- **Team audit logs** — Shared trails with role-based access
+- **Policy enforcement** — Block packages that violate license policies
+
+## Contributing
+
+Contributions are welcome! See the [testing guide](docs/TESTING-GUIDE.md) for how to set up a local development environment.
 
 ## License
 
-MIT -- see [LICENSE](LICENSE) for details.
+[MIT](LICENSE)
