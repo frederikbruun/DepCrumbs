@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DepTrace -- Know Exactly What Gets Installed</title>
+  <meta name="description" content="A dependency audit trail tool for Claude Code. Automatically tracks every package installation across 10 package managers with full metadata.">
+  <link rel="stylesheet" href="variant-b.css">
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">DepTrace</h1>
+      <p class="hero-tagline">Know exactly what gets installed. Every package. Every time.</p>
+      <p class="hero-desc">Automatic dependency auditing for Claude Code. Track every package across 10 managers with full metadata, license info, and integrity hashes.</p>
+      <div class="hero-buttons">
+        <a href="#installation" class="btn btn-gradient">Quick Start</a>
+        <a href="https://github.com/frederikbruun/DepTrace" class="btn btn-outline">GitHub</a>
+      </div>
+
+      <!-- Terminal mockup -->
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot dot-red"></span>
+          <span class="terminal-dot dot-yellow"></span>
+          <span class="terminal-dot dot-green"></span>
+        </div>
+        <div class="terminal-body">
+          <pre><code><span class="t-prompt">~ $</span> <span class="t-cmd">deptrace setup</span>
+<span class="t-output">Hook installed successfully.</span>
+
+<span class="t-prompt">~ $</span> <span class="t-cmd">npm install express lodash</span>
+<span class="t-tag">[DepTrace]</span> express@4.21.0 &#8212; MIT &#8212; sha512-abc...
+<span class="t-tag">[DepTrace]</span> lodash@4.17.21 &#8212; MIT &#8212; sha512-def...
+<span class="t-output">Saved to .deptrace.json</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">10</span>
+        <span class="stat-label">Package Managers</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">&#9670;</span>
+        <span class="stat-label">Full Audit Trail</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Zero Config</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">MIT</span>
+        <span class="stat-label">License</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Features</h2>
+      <p class="section-subtitle">Everything you need to maintain a complete dependency audit trail.</p>
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon icon-universal">&#9635;</div>
+          <h3>Universal Detection</h3>
+          <p>npm, yarn, pnpm, pip, uv, cargo, go, gem, composer, brew</p>
+          <div class="badge-row">
+            <span class="badge badge-blue">npm</span>
+            <span class="badge badge-green">pip</span>
+            <span class="badge badge-orange">cargo</span>
+            <span class="badge badge-purple">go</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-metadata">&#9881;</div>
+          <h3>Rich Metadata</h3>
+          <p>License, version, registry, integrity hash, dependency tree</p>
+          <div class="badge-row">
+            <span class="badge badge-blue">license</span>
+            <span class="badge badge-green">hash</span>
+            <span class="badge badge-purple">tree</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-storage">&#9744;</div>
+          <h3>Dual Storage</h3>
+          <p>Per-project .deptrace files + global ~/.deptrace/ history</p>
+          <div class="badge-row">
+            <span class="badge badge-blue">local</span>
+            <span class="badge badge-green">global</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-output">&#9783;</div>
+          <h3>Flexible Output</h3>
+          <p>Choose between JSON for machines or Markdown for humans</p>
+          <div class="badge-row">
+            <span class="badge badge-blue">JSON</span>
+            <span class="badge badge-orange">Markdown</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-claude">&#9672;</div>
+          <h3>Claude Code Native</h3>
+          <p>Automatic via PostToolUse hooks, zero manual effort</p>
+          <div class="badge-row">
+            <span class="badge badge-purple">hooks</span>
+            <span class="badge badge-blue">auto</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-cli">&#9002;</div>
+          <h3>CLI Power</h3>
+          <p>init, setup, log, export, status &#8212; full control from terminal</p>
+          <div class="badge-row">
+            <span class="badge badge-green">init</span>
+            <span class="badge badge-blue">setup</span>
+            <span class="badge badge-orange">export</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Preview -->
+  <section class="data-preview" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">Output Formats</h2>
+      <p class="section-subtitle">Machine-readable JSON or human-friendly Markdown &#8212; your choice.</p>
+      <div class="preview-grid">
+        <div class="preview-block">
+          <div class="preview-header">
+            <span class="preview-label">JSON</span>
+          </div>
+          <pre class="preview-code"><code>{
+  "packages": [{
+    "name": "express",
+    "resolvedVersion": "4.21.0",
+    "license": "MIT"
+  }]
+}</code></pre>
+        </div>
+        <div class="preview-block">
+          <div class="preview-header">
+            <span class="preview-label">Markdown</span>
+          </div>
+          <pre class="preview-code"><code>## 2026-04-14
+
+| Package | Version | License |
+|---------|---------|---------|
+| express | 4.21.0  | MIT     |</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation -->
+  <section class="installation" id="installation">
+    <div class="container">
+      <h2 class="section-title">Installation</h2>
+      <p class="section-subtitle">Two ways to get started &#8212; pick whichever fits your workflow.</p>
+      <div class="install-grid">
+        <div class="install-card">
+          <div class="install-header install-header-plugin">Plugin</div>
+          <div class="install-body">
+            <p>Add DepTrace as a Claude Code plugin for automatic tracking.</p>
+            <pre class="install-code"><code>claude plugin add deptrace</code></pre>
+            <p class="install-note">Installs hooks automatically. No further setup needed.</p>
+          </div>
+        </div>
+        <div class="install-card">
+          <div class="install-header install-header-cli">CLI</div>
+          <div class="install-body">
+            <p>Install the CLI for manual control and scripting.</p>
+            <pre class="install-code"><code>npm install -g deptrace
+deptrace init
+deptrace setup</code></pre>
+            <p class="install-note">Run <code>deptrace status</code> to verify installation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <div class="container">
+      <h2 class="section-title">Roadmap</h2>
+      <p class="section-subtitle">What we are building next.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Multi-tool support</h4>
+            <p>Track dependencies across multiple AI coding assistants.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>SBOM export</h4>
+            <p>Generate Software Bill of Materials in CycloneDX and SPDX formats.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Vulnerability scanning</h4>
+            <p>Cross-reference installed packages against known CVE databases.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Dashboard UI</h4>
+            <p>Visual web interface for browsing dependency history.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Team audit logs</h4>
+            <p>Shared audit trails for teams with role-based access.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Policy enforcement</h4>
+            <p>Block or warn on packages that violate license or security policies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-brand">DepTrace</p>
+      <p class="footer-license">MIT License</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Compact package box -->
+  <g transform="translate(8, 8)">
+    <path d="M24 4 L48 16 L48 36 L24 48 L0 36 L0 16 Z" fill="#0C2D48"/>
+    <path d="M0 16 L24 28 L24 48 L0 36 Z" fill="#0E4D6E"/>
+    <path d="M48 16 L24 28 L24 48 L48 36 Z" fill="#0A3A54"/>
+    <path d="M24 4 L48 16 L24 28 L0 16 Z" fill="#0EA5E9"/>
+  </g>
+  <!-- Small magnifying glass -->
+  <circle cx="48" cy="42" r="8" stroke="#06B6D4" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <line x1="54" y1="48" x2="59" y2="53" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Trail dots -->
+  <circle cx="12" cy="56" r="2" fill="#0EA5E9" opacity="0.3"/>
+  <circle cx="22" cy="54" r="2.5" fill="#0EA5E9" opacity="0.4"/>
+  <circle cx="33" cy="50" r="3" fill="#0EA5E9" opacity="0.5"/>
+</svg>

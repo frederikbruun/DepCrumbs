@@ -1,0 +1,9 @@
+{
+  "name": "deptrace",
+  "displayName": "DepTrace",
+  "description": "Dependency tracking and audit trail for every package installation",
+  "version": "1.0.0",
+  "author": { "name": "Frederik Bruun" },
+  "license": "MIT",
+  "keywords": ["dependencies", "audit", "security", "tracking"]
+}

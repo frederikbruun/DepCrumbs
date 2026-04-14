@@ -1,0 +1,45 @@
+{
+  "name": "deptrace",
+  "version": "1.0.0",
+  "description": "Dependency audit trail for Claude Code — tracks every package installation with full metadata",
+  "type": "module",
+  "main": "dist/hook-handler.js",
+  "bin": {
+    "deptrace": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc --watch -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist/",
+    "hooks/",
+    ".claude-plugin/"
+  ],
+  "keywords": [
+    "dependencies",
+    "audit",
+    "security",
+    "sbom",
+    "tracking",
+    "claude-code",
+    "hooks"
+  ],
+  "author": "Frederik Bruun",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.19.39",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "yaml": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

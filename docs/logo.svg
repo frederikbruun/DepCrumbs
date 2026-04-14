@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Winding trail / breadcrumb path -->
+  <path d="M80 400 C140 400, 160 340, 200 320 S280 330, 310 290 S370 240, 400 220"
+        stroke="#0EA5E9" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14" opacity="0.35"/>
+
+  <!-- Breadcrumb dots along the trail -->
+  <circle cx="105" cy="393" r="6" fill="#0EA5E9" opacity="0.2"/>
+  <circle cx="155" cy="358" r="7" fill="#0EA5E9" opacity="0.3"/>
+  <circle cx="210" cy="320" r="8" fill="#0EA5E9" opacity="0.4"/>
+  <circle cx="270" cy="310" r="9" fill="#0EA5E9" opacity="0.5"/>
+  <circle cx="320" cy="280" r="10" fill="#0EA5E9" opacity="0.6"/>
+
+  <!-- Package box - main element -->
+  <g transform="translate(160, 100)">
+    <!-- Box back face -->
+    <path d="M96 24 L192 72 L192 168 L96 216 L0 168 L0 72 Z" fill="#0C2D48"/>
+    <!-- Box left face -->
+    <path d="M0 72 L96 120 L96 216 L0 168 Z" fill="#0E4D6E"/>
+    <!-- Box right face -->
+    <path d="M192 72 L96 120 L96 216 L192 168 Z" fill="#0A3A54"/>
+    <!-- Box top face -->
+    <path d="M96 24 L192 72 L96 120 L0 72 Z" fill="#0EA5E9"/>
+    <!-- Box tape / opening line -->
+    <line x1="96" y1="24" x2="96" y2="120" stroke="#38BDF8" stroke-width="3" opacity="0.6"/>
+    <line x1="0" y1="72" x2="192" y2="72" stroke="#38BDF8" stroke-width="2" opacity="0.3"/>
+  </g>
+
+  <!-- Magnifying glass - subtle, overlapping bottom-right of box -->
+  <g transform="translate(310, 220)">
+    <!-- Glass circle -->
+    <circle cx="48" cy="48" r="38" stroke="#06B6D4" stroke-width="7" fill="none" opacity="0.7"/>
+    <circle cx="48" cy="48" r="38" stroke="#38BDF8" stroke-width="3" fill="none" opacity="0.3"/>
+    <!-- Glass fill - subtle -->
+    <circle cx="48" cy="48" r="34" fill="#0EA5E9" opacity="0.08"/>
+    <!-- Handle -->
+    <line x1="76" y1="76" x2="108" y2="108" stroke="#06B6D4" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <!-- Shine on glass -->
+    <path d="M32 34 Q38 26, 48 30" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
+  </g>
+</svg>
