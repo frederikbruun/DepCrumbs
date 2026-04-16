@@ -47,6 +47,23 @@ function parseTokens(argsStr: string): string[] | null {
   return argsStr.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) ?? null;
 }
 
+function isShellBoundary(tok: string): boolean {
+  if (tok === "|" || tok === "||" || tok === "&&" || tok === ";") return true;
+  // redirects: >, >>, <, 2>&1, &>, 2>, 1>, etc.
+  if (/^[0-9]?[><]/.test(tok)) return true;
+  if (tok === "&>") return true;
+  return false;
+}
+
+function stripQuotes(tok: string): string {
+  if (tok.length >= 2 &&
+      ((tok.startsWith('"') && tok.endsWith('"')) ||
+       (tok.startsWith("'") && tok.endsWith("'")))) {
+    return tok.slice(1, -1);
+  }
+  return tok;
+}
+
 function parsePipInstallArgs(argsStr: string): {
   packages: string[];
   flags: string[];
@@ -62,6 +79,8 @@ function parsePipInstallArgs(argsStr: string): {
   let i = 0;
   while (i < tokens.length) {
     const tok = tokens[i]!;
+
+    if (isShellBoundary(tok)) break;
 
     if (tok === "-U" || tok === "--upgrade") {
       flags.push("--upgrade");
@@ -101,7 +120,7 @@ function parsePipInstallArgs(argsStr: string): {
       continue;
     }
 
-    packages.push(tok);
+    packages.push(stripQuotes(tok));
     i++;
   }
 
@@ -136,6 +155,8 @@ function parseAddArgs(argsStr: string): {
   while (i < tokens.length) {
     const tok = tokens[i]!;
 
+    if (isShellBoundary(tok)) break;
+
     if (tok === "--dev") {
       isDev = true;
       flags.push("--dev");
@@ -159,7 +180,7 @@ function parseAddArgs(argsStr: string): {
       continue;
     }
 
-    packages.push(tok);
+    packages.push(stripQuotes(tok));
     i++;
   }
 

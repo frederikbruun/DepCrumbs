@@ -61,6 +61,22 @@ const VALUE_FLAGS = new Set([
   "--abi",
 ]);
 
+function isShellBoundary(tok: string): boolean {
+  if (tok === "|" || tok === "||" || tok === "&&" || tok === ";") return true;
+  if (/^[0-9]?[><]/.test(tok)) return true;
+  if (tok === "&>") return true;
+  return false;
+}
+
+function stripQuotes(tok: string): string {
+  if (tok.length >= 2 &&
+      ((tok.startsWith('"') && tok.endsWith('"')) ||
+       (tok.startsWith("'") && tok.endsWith("'")))) {
+    return tok.slice(1, -1);
+  }
+  return tok;
+}
+
 function parseArgs(argsStr: string): ParsedInstall | null {
   const tokens = argsStr.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g);
   if (!tokens) return null;
@@ -119,8 +135,10 @@ function parseArgs(argsStr: string): ParsedInstall | null {
       continue;
     }
 
+    if (isShellBoundary(tok)) break;
+
     // Positional arg – treat as package name (may include version specifier)
-    packages.push(tok);
+    packages.push(stripQuotes(tok));
     i++;
   }
 

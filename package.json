@@ -1,6 +1,6 @@
 {
   "name": "depcrumbs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dependency audit trail for Claude Code — tracks every package installation with full metadata",
   "type": "module",
   "main": "dist/hook-handler.js",

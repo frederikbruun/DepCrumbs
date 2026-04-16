@@ -4,6 +4,11 @@ import type { Enricher, EnrichedPackage } from "./types.js";
 
 const execFileAsync = promisify(execFile);
 
+function barePackageName(spec: string): string {
+  // Strip version specifiers: >=, <=, ==, !=, ~=, >, <, [extras], ; markers
+  return spec.split(/[><=!~\s\[;]/)[0]?.trim() ?? spec;
+}
+
 export class PipEnricher implements Enricher {
   async enrich(
     packageNames: string[],
@@ -25,9 +30,10 @@ export class PipEnricher implements Enricher {
     let resolvedVersion = "unknown";
     let license = "unknown";
     let directDependencies: string[] = [];
+    const bareName = barePackageName(packageName);
 
     try {
-      const { stdout } = await execFileAsync("pip", ["show", packageName]);
+      const { stdout } = await execFileAsync("pip", ["show", bareName]);
       const lines = stdout.split("\n");
 
       for (const line of lines) {
@@ -53,7 +59,7 @@ export class PipEnricher implements Enricher {
       name: packageName,
       requestedVersion: "unknown",
       resolvedVersion,
-      registryUrl: `https://pypi.org/project/${packageName}/`,
+      registryUrl: `https://pypi.org/project/${bareName}/`,
       license,
       integrityHash: "unknown",
       isDirect: true,
