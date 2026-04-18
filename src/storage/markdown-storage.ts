@@ -20,7 +20,11 @@ export class MarkdownStorage implements StorageBackend {
   }
 
   async read(): Promise<EnrichedInstall[]> {
-    return [];
+    // Markdown is append-only — use JSON format for querying
+    if (!existsSync(this.filePath)) return [];
+    throw new Error(
+      "Markdown storage does not support querying. Run with JSON format (default) to use log/export commands.",
+    );
   }
 
   getPath(): string {

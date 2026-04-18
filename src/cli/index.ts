@@ -13,7 +13,7 @@ program
   .description(
     "Dependency tracking and audit trail for every package installation",
   )
-  .version("1.0.0");
+  .version("1.0.1");
 
 // --hook flag: run hook-handler directly (reads stdin)
 program.option("--hook", "Run the PostToolUse hook handler (reads JSON from stdin)");

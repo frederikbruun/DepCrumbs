@@ -13,10 +13,16 @@ import { dirname } from "node:path";
 async function main(): Promise<void> {
   // 1. Read stdin
   const input = await readStdin();
-  const data = JSON.parse(input);
+  let data: unknown;
+  try {
+    data = JSON.parse(input);
+  } catch {
+    return;
+  }
 
   // 2. Extract command from tool_input
-  const command = data?.tool_input?.command;
+  const toolInput = (data as Record<string, Record<string, unknown>>)?.tool_input;
+  const command = toolInput?.command as string | undefined;
   if (!command) return;
 
   // 3. Detect install commands
